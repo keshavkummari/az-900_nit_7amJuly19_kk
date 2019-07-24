@@ -1,0 +1,21 @@
+
+Cloud Vendors
+
+Cloud Models
+
+Cloud Services
+
+- Benefits and Considerations
+
+
+SCM/VCS :
+
+github,
+
+gitlab
+
+bitbucket
+
+aws codecommit
+
+azure repos
