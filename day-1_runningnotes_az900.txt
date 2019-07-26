@@ -1,21 +1,66 @@
 
-Cloud Vendors
+1. Download, Install and Configure required softwares :
 
-Cloud Models
+Local Machine  : Laptop/Desktop
 
-Cloud Services
+IDE and Text Editor :
 
-- Benefits and Considerations
+1. Visual Studio Code (IDE: Integrated Development Environment)
+
+2. ATOM (Text Editor)
+
+3. gitbash - VCS/SCM (Git Commands)
+
+VCS : Version Control Systems / SCM : Source Code Management : Github, Gitlab, bitbucket,
+Azure Repos, AWS codecommit
+
+agile and devops : jira (Agile Scrum Board)
+
+2. Account Creation with various Websites :
+
+1. portal.azure.com
+2. github.com
+3. trello.com
+4. Multiple websites -
+
+https://dzone.com/articles/top-20-git-commands-with-examples
 
 
-SCM/VCS :
+STEP-1 : Create Account with outlook.live.com
 
-github,
+STEP-2 : Validate your outlook mail
 
-gitlab
+STEP-3 : open a portal.azure.com
 
-bitbucket
+STEP-4 : Create Account with outlook mail id
 
-aws codecommit
+Create Resources as part of Azure:
 
-azure repos
+GUI + CUI + Script
+
+
+
+
+Launch a Linux Operating System Part of Azure:
+
+STEP-1 :
+
+Resource Group :
+
+STEP-2 :
+
+Name :
+
+OS :
+
+UserName :
+
+Password :
+
+STEP-3 : Enable Ports SSH(22), HTTP(80)
+
+STEP-4 : Connect Linux Machine from Local Machine(Windows/MacOS/Linux)
+
+ssh username@ipaddress
+
+Password
