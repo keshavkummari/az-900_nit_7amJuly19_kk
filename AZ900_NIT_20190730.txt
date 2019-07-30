@@ -1,0 +1,32 @@
+
+Azure Architecure :
+
+1. Regions : 
+
+    1.1 54 Regions 
+    Groups of Multiple Azure Data Centers within a latency-defined perimeter and connected through a 
+    dedicated regional low-latency network 
+
+    Region(southindia) - AZ(Data Centers) : 3 
+
+    Deploying your applications/systems to multiple regions allows for resiliency to region-wide outages.  
+
+2. Availability Zones
+
+3. Resource Groups
+
+BMW : 
+
+bmw.india.com
+
+bmw.us.com
+
+Regions : india(Resource Group-1 bmw.india.com ), us(Resource Group-2 - bmw.us.com) 
+
+Resource-1/2 
+Database - MySQL(us_abc_info), ind_abc_info
+
+4. Azure Resource Manager
+
+5. Azure Architecure - Usage and Benefits
+
