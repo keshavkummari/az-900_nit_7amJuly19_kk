@@ -1,0 +1,54 @@
+
+# Creating Operating System on Azure Portal using CLI/Terminal :
+
+Prerequisites :
+
+Login to Portal and Click on Cloud Shell(Powershell or Bash)
+
+STEP-1 : Create a Resource Group :
+A resource group is a logical container where you can deploy and manage Azure Stack resources. From your Azure Stack environment, run the az group create command to create a resource group.
+
+# az group create --name myResourceGroup --location local 
+
+The provided location 'local' is not available for resource group. 
+List of available regions is 'centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,
+northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,
+japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,
+centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth,
+francecentral,southafricanorth,uaenorth,australiacentral'.
+
+chennakesavulu@Azure:~$ az group create --name myResourceGroup --location southindia
+{
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup",
+  "location": "southindia",
+  "managedBy": null,
+  "name": "myResourceGroup",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": null
+}
+
+
+STEP-2 : Create a Virtual Machine
+
+# az vm create \
+    --resource-group "myResourceGroup" \
+    --name "dev.windows.com" \
+    --image "Win2019Datacenter" \
+    --admin-username "nit-admin" \
+    --admin-password "Redhat@123456" \
+    --location "southindia"
+
+# az vm create --resource-group "myResourceGroup" --name "devwindowscom" --image "Win2019Datacenter" --admin-username "nit-admin" --admin-password "Redhat@123456"   --location "southindia"
+
+STEP-3 : Enable required ports i.e. SSH(22), RDP(3389) & HTTP(80)
+
+STEP-4 : Connect Virtual Machine from our Local Machine(Laptop/Desktop)
+
+STEP-5 : Install a WebServer(Windows(IIS), Linux(HTTPD))
+
+STEP-6 : Test the WebServer
+
+STEP-7 : Clean up Resources 
