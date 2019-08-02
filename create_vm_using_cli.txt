@@ -35,13 +35,13 @@ STEP-2 : Create a Virtual Machine
 
 # az vm create \
     --resource-group "myResourceGroup" \
-    --name "dev.windows.com" \
+    --name "devwindowscom" \
     --image "Win2019Datacenter" \
     --admin-username "nit-admin" \
     --admin-password "Redhat@123456" \
     --location "southindia"
 
-# az vm create --resource-group "myResourceGroup" --name "devwindowscom" --image "Win2019Datacenter" --admin-username "nit-admin" --admin-password "Redhat@123456"   --location "southindia"
+# az vm create --resource-group "myResourceGroup" --name "linux" --image "Win2019Datacenter" --admin-username "nit-admin" --admin-password "Redhat@123456"   --location "southindia"
 
 STEP-3 : Enable required ports i.e. SSH(22), RDP(3389) & HTTP(80)
 
@@ -52,3 +52,37 @@ STEP-5 : Install a WebServer(Windows(IIS), Linux(HTTPD))
 STEP-6 : Test the WebServer
 
 STEP-7 : Clean up Resources 
+
+# az group create --name myResourceGroup --location southindia
+
+{
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup",
+  "location": "southindia",
+  "managedBy": null,
+  "name": "myResourceGroup",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": null
+}
+
+# az vm create --resource-group "myResourceGroup" --name "linux" --image "UbuntuLTS" --admin-username "ubuntu" --admin-password "Redhat@123456"   --location "southindia"
+
+{
+  "fqdns": "",
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/linux",
+  "location": "southindia",
+  "macAddress": "00-0D-3A-0A-74-A1",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "13.71.92.208",
+  "resourceGroup": "myResourceGroup",
+  "zones": ""
+}
+
+STEP-5 : Install WebServer i.e. Apache2 
+
+13.71.92.208:80
+
+
