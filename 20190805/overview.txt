@@ -1,0 +1,20 @@
+
+Agenda : 
+
+Azure Products and Services :
+
+1. Compute :
+
+2. Storage :
+
+Azure Storage Services :
+
+1. IaaS : Disks, Files
+
+2. PaaS : Blobs, Tables, Queues
+
+Azure Storage Tiers :
+
+1. High  : Hot Tier 
+2. Storage Cost : Cool Tier 
+3. Low : Archive Tier 
