@@ -15,6 +15,15 @@ Azure Storage Services :
 
 Azure Storage Tiers :
 
-1. High  : Hot Tier 
-2. Storage Cost : Cool Tier 
-3. Low : Archive Tier 
+1. High  : Hot Tier   (High Speed)
+2. Storage Cost : Cool Tier (Data Access Speed)
+3. Low : Archive Tier (Low)
+
+https://azure.microsoft.com/en-gb/pricing/details/storage/
+
+https://docs.microsoft.com/en-gb/azure/storage/
+
+https://docs.microsoft.com/en-gb/azure/cloud-shell/persisting-shell-storage
+
+
+

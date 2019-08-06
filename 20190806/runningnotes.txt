@@ -1,0 +1,598 @@
+chennakesavulu@Azure:~$ cat vm_create.sh
+#!/bin/bash
+
+# Update for your Admin Password
+AdminPassword=NIT@123456789
+
+# Create a Resource Group
+az group create --name myResourceGroup1 --location southindia
+
+# Create a Virtual Network
+az network vnet create --resource-group myResourceGroup1 --name myVent1 --subnet-name mySubnet1
+
+# Create a Public IpAddress
+az network public-ip create --resource-group myResourceGroup1 --name myPublicIP1
+
+# Create a Network Security Group
+az network nsg create --resource-group myResourceGroup1 --name myNetworkSecurityGroup1
+
+# Create a Vitual Network Card and associate with Public-IP and NSG
+az network nic create --resource-group myResourceGroup1 --name myNIC1 --vnet-name myVent1 --subnet mySubnet1 --network-security-group myNetworkSecurityGroup1 --public-ip-address myPublicIP1
+
+# Create a Virtual Machine
+az vm create --resource-group myResourceGroup1 --name myVM1 --location southindia --nics myNIC1 --image win2019datacenter --admin-username azureuser1 --admin-password $AdminPassword
+
+# Open Port 3389 to Allow RDP Traffic to Host
+az vm open-port --port 3389 --resource-group myResourceGroup1 --name myVM1
+
+chennakesavulu@Azure:~$ bash -x vm_create.sh
++ AdminPassword=NIT@123456789
++ az group create --name myResourceGroup1 --location southindia
+{
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1",
+  "location": "southindia",
+  "managedBy": null,
+  "name": "myResourceGroup1",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": null
+}
++ az network vnet create --resource-group myResourceGroup1 --name myVent1 --subnet-name mySubnet1
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": {
+      "dnsServers": []
+    },
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"49292cb7-5901-4c24-8d80-79a904acf9ff\"",
+    "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/virtualNetworks/myVent1",
+    "location": "southindia",
+    "name": "myVent1",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup1",
+    "resourceGuid": "1f23d9de-dd5a-4132-bc5a-2f6550afa93f",
+    "subnets": [
+      {
+        "addressPrefix": "10.0.0.0/24",
+        "addressPrefixes": null,
+        "delegations": [],
+        "etag": "W/\"49292cb7-5901-4c24-8d80-79a904acf9ff\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/virtualNetworks/myVent1/subnets/mySubnet1",
+        "ipConfigurationProfiles": null,
+        "ipConfigurations": null,
+        "name": "mySubnet1",
+        "natGateway": null,
+        "networkSecurityGroup": null,
+        "privateEndpoints": null,
+        "provisioningState": "Succeeded",
+        "purpose": null,
+        "resourceGroup": "myResourceGroup1",
+        "resourceNavigationLinks": null,
+        "routeTable": null,
+        "serviceAssociationLinks": null,
+        "serviceEndpointPolicies": null,
+        "serviceEndpoints": null,
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
++ az network public-ip create --resource-group myResourceGroup1 --name myPublicIP1
+{
+  "publicIp": {
+    "ddosSettings": null,
+    "dnsSettings": null,
+    "etag": "W/\"d422413f-a331-47b5-b5f9-a32b179ebb61\"",
+    "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/publicIPAddresses/myPublicIP1",
+    "idleTimeoutInMinutes": 4,
+    "ipAddress": null,
+    "ipConfiguration": null,
+    "ipTags": [],
+    "location": "southindia",
+    "name": "myPublicIP1",
+    "provisioningState": "Succeeded",
+    "publicIpAddressVersion": "IPv4",
+    "publicIpAllocationMethod": "Dynamic",
+    "publicIpPrefix": null,
+    "resourceGroup": "myResourceGroup1",
+    "resourceGuid": "308d3601-d483-4c46-8ef5-86ed42d82d1a",
+    "sku": {
+      "name": "Basic",
+      "tier": "Regional"
+    },
+    "tags": null,
+    "type": "Microsoft.Network/publicIPAddresses",
+    "zones": null
+  }
+}
++ az network nsg create --resource-group myResourceGroup1 --name myNetworkSecurityGroup1
+{
+  "NewNSG": {
+    "defaultSecurityRules": [
+      {
+        "access": "Allow",
+        "description": "Allow inbound traffic from all VMs in VNET",
+        "destinationAddressPrefix": "VirtualNetwork",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowVnetInBound",
+        "name": "AllowVnetInBound",
+        "priority": 65000,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "VirtualNetwork",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow inbound traffic from azure load balancer",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+        "name": "AllowAzureLoadBalancerInBound",
+        "priority": 65001,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "AzureLoadBalancer",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Deny",
+        "description": "Deny all inbound traffic",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/DenyAllInBound",
+        "name": "DenyAllInBound",
+        "priority": 65500,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+        "destinationAddressPrefix": "VirtualNetwork",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowVnetOutBound",
+        "name": "AllowVnetOutBound",
+        "priority": 65000,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "VirtualNetwork",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow outbound traffic from all VMs to Internet",
+        "destinationAddressPrefix": "Internet",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowInternetOutBound",
+        "name": "AllowInternetOutBound",
+        "priority": 65001,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Deny",
+        "description": "Deny all outbound traffic",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": null,
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/DenyAllOutBound",
+        "name": "DenyAllOutBound",
+        "priority": 65500,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup1",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": null,
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      }
+    ],
+    "etag": "W/\"41f276d1-29c4-40e4-842d-3e9ed3125107\"",
+    "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1",
+    "location": "southindia",
+    "name": "myNetworkSecurityGroup1",
+    "networkInterfaces": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup1",
+    "resourceGuid": "3ec7dc0a-6c50-4860-8164-e166be9020e8",
+    "securityRules": [],
+    "subnets": null,
+    "tags": null,
+    "type": "Microsoft.Network/networkSecurityGroups"
+  }
+}
++ az network nic create --resource-group myResourceGroup1 --name myNIC1 --vnet-name myVent1 --subnet mySubnet1 --network-security-group myNetworkSecurityGroup1 --public-ip-address myPublicIP1
+{
+  "NewNIC": {
+    "dnsSettings": {
+      "appliedDnsServers": [],
+      "dnsServers": [],
+      "internalDnsNameLabel": null,
+      "internalDomainNameSuffix": "11msgh001uzedpc0f3svbl3jhh.tx.internal.cloudapp.net",
+      "internalFqdn": null
+    },
+    "enableAcceleratedNetworking": false,
+    "enableIpForwarding": false,
+    "etag": "W/\"cd77492c-5cc2-441d-a5e3-ff803172c8e9\"",
+    "hostedWorkloads": [],
+    "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkInterfaces/myNIC1",
+    "ipConfigurations": [
+      {
+        "applicationGatewayBackendAddressPools": null,
+        "applicationSecurityGroups": null,
+        "etag": "W/\"cd77492c-5cc2-441d-a5e3-ff803172c8e9\"",
+        "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkInterfaces/myNIC1/ipConfigurations/ipconfig1",
+        "loadBalancerBackendAddressPools": null,
+        "loadBalancerInboundNatRules": null,
+        "name": "ipconfig1",
+        "primary": true,
+        "privateIpAddress": "10.0.0.4",
+        "privateIpAddressVersion": "IPv4",
+        "privateIpAllocationMethod": "Dynamic",
+        "provisioningState": "Succeeded",
+        "publicIpAddress": {
+          "ddosSettings": null,
+          "dnsSettings": null,
+          "etag": null,
+          "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/publicIPAddresses/myPublicIP1",
+          "idleTimeoutInMinutes": null,
+          "ipAddress": null,
+          "ipConfiguration": null,
+          "ipTags": null,
+          "location": null,
+          "name": null,
+          "provisioningState": null,
+          "publicIpAddressVersion": null,
+          "publicIpAllocationMethod": null,
+          "publicIpPrefix": null,
+          "resourceGroup": "myResourceGroup1",
+          "resourceGuid": null,
+          "sku": null,
+          "tags": null,
+          "type": null,
+          "zones": null
+        },
+        "resourceGroup": "myResourceGroup1",
+        "subnet": {
+          "addressPrefix": null,
+          "addressPrefixes": null,
+          "delegations": null,
+          "etag": null,
+          "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/virtualNetworks/myVent1/subnets/mySubnet1",
+          "ipConfigurationProfiles": null,
+          "ipConfigurations": null,
+          "name": null,
+          "natGateway": null,
+          "networkSecurityGroup": null,
+          "privateEndpoints": null,
+          "provisioningState": null,
+          "purpose": null,
+          "resourceGroup": "myResourceGroup1",
+          "resourceNavigationLinks": null,
+          "routeTable": null,
+          "serviceAssociationLinks": null,
+          "serviceEndpointPolicies": null,
+          "serviceEndpoints": null
+        },
+        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+        "virtualNetworkTaps": null
+      }
+    ],
+    "location": "southindia",
+    "macAddress": null,
+    "name": "myNIC1",
+    "networkSecurityGroup": {
+      "defaultSecurityRules": null,
+      "etag": null,
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1",
+      "location": null,
+      "name": null,
+      "networkInterfaces": null,
+      "provisioningState": null,
+      "resourceGroup": "myResourceGroup1",
+      "resourceGuid": null,
+      "securityRules": null,
+      "subnets": null,
+      "tags": null,
+      "type": null
+    },
+    "primary": null,
+    "privateEndpoint": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup1",
+    "resourceGuid": "d9c64c24-5865-4c61-ab44-4da1ae6fb790",
+    "tags": null,
+    "tapConfigurations": [],
+    "type": "Microsoft.Network/networkInterfaces",
+    "virtualMachine": null
+  }
+}
++ az vm create --resource-group myResourceGroup1 --name myVM1 --location southindia --nics myNIC1 --image win2019datacenter --admin-username azureuser1 --admin-password NIT@123456789
+{
+  "fqdns": "",
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myVM1",
+  "location": "southindia",
+  "macAddress": "00-0D-3A-F2-D7-0B",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "52.172.24.204",
+  "resourceGroup": "myResourceGroup1",
+  "zones": ""
+}
++ az vm open-port --port 3389 --resource-group myResourceGroup1 --name myVM1
+{
+  "defaultSecurityRules": [
+    {
+      "access": "Allow",
+      "description": "Allow inbound traffic from all VMs in VNET",
+      "destinationAddressPrefix": "VirtualNetwork",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Inbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowVnetInBound",
+      "name": "AllowVnetInBound",
+      "priority": 65000,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "VirtualNetwork",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    },
+    {
+      "access": "Allow",
+      "description": "Allow inbound traffic from azure load balancer",
+      "destinationAddressPrefix": "*",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Inbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+      "name": "AllowAzureLoadBalancerInBound",
+      "priority": 65001,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "AzureLoadBalancer",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    },
+    {
+      "access": "Deny",
+      "description": "Deny all inbound traffic",
+      "destinationAddressPrefix": "*",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Inbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/DenyAllInBound",
+      "name": "DenyAllInBound",
+      "priority": 65500,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "*",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    },
+    {
+      "access": "Allow",
+      "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+      "destinationAddressPrefix": "VirtualNetwork",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Outbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowVnetOutBound",
+      "name": "AllowVnetOutBound",
+      "priority": 65000,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "VirtualNetwork",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    },
+    {
+      "access": "Allow",
+      "description": "Allow outbound traffic from all VMs to Internet",
+      "destinationAddressPrefix": "Internet",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Outbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/AllowInternetOutBound",
+      "name": "AllowInternetOutBound",
+      "priority": 65001,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "*",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    },
+    {
+      "access": "Deny",
+      "description": "Deny all outbound traffic",
+      "destinationAddressPrefix": "*",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "*",
+      "destinationPortRanges": [],
+      "direction": "Outbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/defaultSecurityRules/DenyAllOutBound",
+      "name": "DenyAllOutBound",
+      "priority": 65500,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "*",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+    }
+  ],
+  "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+  "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1",
+  "location": "southindia",
+  "name": "myNetworkSecurityGroup1",
+  "networkInterfaces": [
+    {
+      "dnsSettings": null,
+      "enableAcceleratedNetworking": null,
+      "enableIpForwarding": null,
+      "etag": null,
+      "hostedWorkloads": null,
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkInterfaces/myNIC1",
+      "ipConfigurations": null,
+      "location": null,
+      "macAddress": null,
+      "name": null,
+      "networkSecurityGroup": null,
+      "primary": null,
+      "privateEndpoint": null,
+      "provisioningState": null,
+      "resourceGroup": "myResourceGroup1",
+      "resourceGuid": null,
+      "tags": null,
+      "tapConfigurations": null,
+      "type": null,
+      "virtualMachine": null
+    }
+  ],
+  "provisioningState": "Succeeded",
+  "resourceGroup": "myResourceGroup1",
+  "resourceGuid": "3ec7dc0a-6c50-4860-8164-e166be9020e8",
+  "securityRules": [
+    {
+      "access": "Allow",
+      "description": null,
+      "destinationAddressPrefix": "*",
+      "destinationAddressPrefixes": [],
+      "destinationApplicationSecurityGroups": null,
+      "destinationPortRange": "3389",
+      "destinationPortRanges": [],
+      "direction": "Inbound",
+      "etag": "W/\"8f2c3f35-3287-4d2e-8308-d2e16d8d989c\"",
+      "id": "/subscriptions/2244cffb-d928-4f63-bde6-9e10d495aa91/resourceGroups/myResourceGroup1/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup1/securityRules/open-port-3389",
+      "name": "open-port-3389",
+      "priority": 900,
+      "protocol": "*",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "myResourceGroup1",
+      "sourceAddressPrefix": "*",
+      "sourceAddressPrefixes": [],
+      "sourceApplicationSecurityGroups": null,
+      "sourcePortRange": "*",
+      "sourcePortRanges": [],
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+    }
+  ],
+  "subnets": null,
+  "tags": null,
+  "type": "Microsoft.Network/networkSecurityGroups"
+}
+chennakesavulu@Azure:~$ az group delete --name myResourceGroup1 --yes
+
