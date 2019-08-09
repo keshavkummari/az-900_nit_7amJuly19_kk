@@ -1,0 +1,53 @@
+
+Host a Website part of Azure Cloud :
+
+
+STEP-1 : Purchase a Domain From Domain Seller i.e. Godaddy, Google, AWS, etc...
+
+Domain Name : CODEWITHCKK.COM
+
+STEP-2 : WebSite Hosting Vendor i.e. AWS, AZURE, Godaddy etc...
+
+Hosting Vendor : Azure 
+
+Networking >> DNS Zones >> Hosted Zone (codewithckk.com)
+
+2 Files were created during the Hosted Zone creation:
+
+1. SOA : 
+2. NS  : 
+    4 : hostnames and these hostnames need to be updated at Domain Register i.e. Godaddy :
+        
+        Go to Godaddy >> Products >> Domain Name >> DNS >> Nameservers >> Change >>
+            1.
+            2.
+            3.
+            4. 
+
+Case-1 :
+User >> codewithckk.com >> Godaddy >> NS(4) >> AZURE (Linux/Windows) Website  
+
+STEP-3 : Launch a Linux Server part of Azure Cloud using Script
+
+Linux : Centos 7.5 
+
+Connect Linux Machine from Local Machine :
+
+ssh username@ipaddress
+
+STEP-4 : Download, Install and Configure of WebServer :
+
+# sudo su 
+
+# yum install http* --skip-broken -y
+
+# yum install vim* curl* wget* unzip* elinks* -y
+
+# systemctl status httpd.service 
+
+# systemctl start httpd.service 
+
+# systemctl enable httpd.service 
+
+echo "Welcome to Azure World" >> /var/www/html/index.html
+

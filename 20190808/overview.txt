@@ -1,0 +1,64 @@
+
+# Azure Products & Services :
+
+1. Compute
+
+2. Storage 
+
+3. Databases
+
+4. Networking :
+
+Azure Virtual Network : Virtual Machines(Windows|Linux)
+
+Allows to communicate Securely to VM internet and on-premises networks 
+
+https://azure.microsoft.com/en-gb/services/virtual-network/
+
+Azure Load Balancer : Enables us to balance the load on vm's which is coming from internet 
+
+https://azure.microsoft.com/en-gb/services/load-balancer/
+
+Azure VPN Gateway : 
+
+Used to Send encrypted traffic between an Azure Virtual Network and an on-premises 
+location over public internet or between azure virtual networks over the Microsoft Network.
+
+
+
+Azure APP Gateway :
+
+Azure Content Delivery Network
+
+CDN : 
+
+Media Domain : Share Images, Videos etc... DB 
+
+5. The Azure Marketplace 
+
+# Host a Website :
+
+STEP-1 : Purchase a Domain from Domain Sellers :
+
+STEP-2 : Go to Azure & Launch a VM (Windows(IIS), Linux(Httpd)) : 22, 80 , 3389 
+
+DocumentRoot : /var/www/html 
+
+STEP-3 : Code index.html 
+
+<html>
+<body>
+
+<h1> Welcome to Azure World</h1>
+
+</body>
+</html>
+
+Service : httpd 
+
+STEP-4 : Ipadress of the VM and validate on any browser 
+
+STEP-5 : DNS @Azure :
+
+
+
