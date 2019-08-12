@@ -31,6 +31,9 @@ STEP-3 : Launch a Linux Server part of Azure Cloud using Script
 
 Linux : Centos 7.5 
 
+Invalid image "centos-7.5". Use a valid image URN, custom image name, custom image id, 
+VHD blob URI, or pick an image from ['CentOS', 'CoreOS', 'Debian', 'openSUSE-Leap', 'RHEL', 'SLES', 'UbuntuLTS', 'Win2019Datacenter', 'Win2016Datacenter', 'Win2012R2Datacenter', 'Win2012Datacenter', 'Win2008R2SP1'].
+
 Connect Linux Machine from Local Machine :
 
 ssh username@ipaddress
@@ -51,3 +54,15 @@ STEP-4 : Download, Install and Configure of WebServer :
 
 echo "Welcome to Azure World" >> /var/www/html/index.html
 
+
+#!/bin/bash
+cd /opt/
+yum install wget* curl* vim* unzip* -y
+yum update -y
+wget https://www.free-css.com/assets/files/free-css-templates/download/page231/bizexpress-v1.0.1.zip
+unzip *.zip
+cd Biz*
+yum install http* --skip-broken -y
+mv * /var/www/html/
+service httpd start
+# systemct start httpd.service
