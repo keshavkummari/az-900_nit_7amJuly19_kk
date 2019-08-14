@@ -1,0 +1,45 @@
+Agenda : 
+
+Azure Pricing and Support :
+
+1. Azure Subscriptions
+    1. Azure Subscriptions :
+    1.0. Types of Subscriptions :
+        1.1  Enterprise Agreement
+        1.2. Certified Solution Partner 
+        1.3. Pay-As-You-Go etc.. 
+    
+    2. CKK :
+        1. AZURE Account (Parent) : Keshav(Permissions) 
+            1. Development 
+            2. QA 
+            3. DevOps
+            4. Management
+
+        1. Management Groups (CKK IT)
+        2. Subscriptions     Dev,QA,DevOps,etc...
+        3. Resource Groups   
+        4. Resources(Vnet,NIC,NACL,SG,VM,DB,etc....)
+
+    2. Subscription Options & Uses
+        1. Reserved Instances : VM's 
+            VM's : 1-3 
+        2. Resusable across instances any region or account of the family
+        3. Vm's, SQL , Cosmos DB, etc...
+
+2. Azure Support Options
+
+3. Azure Service Level Agreements(SLA's)
+
+4. Planning and Managing Azure Costs :
+    1. Purchasing Azure Products and Services
+    2. Cost Factors
+    3. Pricing Calculator
+    4. Minimizing Azure Costs
+    5. The Azure Free Account 
+    6. Billing Zones 
+    7. Total Cost of Ownership(TOC) Calculator
+    8. Azure Cost Management
+
+ 
+5. The Azure Service Lifecycle
