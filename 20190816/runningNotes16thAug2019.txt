@@ -1,0 +1,45 @@
+
+Agenda : Security, Privacy, Compliance and Trust
+
+1.  Network Security :
+
+    1. Azure Firewall
+    2. Azure DDoS Protection
+    3. Networking Security Groups(NSG's)
+    4. Choosing an Azure Security Solutions 
+
+2. Azure Security Tools and Features 
+    1. Security In Azure 
+    2. Azure Key Vault
+    3. Azure Security Center
+    4. Azure Information Protection(AIP)
+    5. Azure Advanced Threat Protection(ATP)
+
+3. Azure Identity Services 
+    1. Authentication and Authorization
+    2. Azure Multi-Factor Authentication(MFA)
+    3. Azure Active Directory(ADD)
+
+4. Azure Governance
+    1. Azure Policies
+    2. Azure Initiatives
+    3. Role-Based Access Control(RBAC)
+    4. Resource Locking
+    5. Security Assistance in Azure Advisor
+
+5. Azure Privacy, Compliance, and Data Protection Standards 
+
+
+6. Monitoring and Reporting in Azure 
+    1. Azure Monitor
+    2. Azure Service Health 
+
+
+IPV4 : 
+
+IPV6 :
+
+Hexadecimal : 0-9 a(10),b(11),c(12),d(13),e(14),f(15)
+
+inet6 fe80:0000:850:65f:8228:b01d%en1 prefixlen 64 secured scopeid 0x8 
+	inet 192.168.0.3 netmask 0xffffff00 broadcast 192.168.0.255
