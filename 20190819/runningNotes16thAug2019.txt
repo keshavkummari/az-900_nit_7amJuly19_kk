@@ -56,3 +56,33 @@ Azure Security Solutions :
 3. Usage of NSG's for Bare Minimum Network Connectivity : Inbound, outbound and enfore rules which are required.
 
 4. Use of Azure Firewall and Azure DDoS Protection : 
+
+
+
+
+Virtual Machine :
+
+User ---> www.codewithckk.com ---> Godaddy ---> NS ---> Azure DNS Zones --> HostedZones(codewithckk.com)
+
+---> Virtual Machine(Linux(WebServer(Apache httpd)))
+
+Welcome to Azure World 
+
+
+
+User ---> www.codewithckk.com ---> Godaddy ---> NS ---> Azure DNS Zones --> HostedZones(codewithckk.com)
+
+---> Load Balancer -----> Virtual Machine(Linux(WebServer(Apache httpd)))
+                   -----> Virtual Machine(Linux(WebServer(Apache httpd)))
+
+Welcome to Azure World 
+
+User ---> www.codewithckk.com ---> Godaddy ---> NS ---> Azure DNS Zones --> HostedZones(codewithckk.com)
+
+---> Load Balancer(Health Check) AutoScaling -----> Virtual Machine(Linux(WebServer(Apache httpd)))
+                                             -----> Virtual Machine(Linux(WebServer(Apache httpd)))
+                                             -----> Virtual Machine(Linux(WebServer(Apache httpd)))
+
+for every 10 sec it will execute ping port / protocol (http(80), or https(443))
+
+Welcome to Azure World 
